@@ -187,3 +187,12 @@ first_class = selected_table.filter(lambda x: x["class"] == "1")
 print("The average cost for first class tickets.")
 print(first_class.aggregate(lambda x: sum(x)/len(x), 'fare'))
 print()
+
+# survival rate
+selected_table = my_DB.search("Titanic")
+man = selected_table.filter(lambda x: x["gender"] == "M")
+woman = selected_table.filter(lambda x: x["gender"] == "F")
+print("The average survival rate for men is.")
+print(f"{len((man.filter(lambda x: x['survived'] == 'yes')).table)/len(man.table) * 100} %")
+print("The average survival rate for women is.")
+print(f"{len((woman.filter(lambda x: x['survived'] == 'yes')).table)/len(woman.table) * 100} %")
