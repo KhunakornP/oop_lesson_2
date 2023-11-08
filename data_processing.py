@@ -152,4 +152,15 @@ final_player = x.filter(lambda x: int(x["minutes"]) < 200)
 print(f"Name: {final_player.table[0]['surname']}, "
       f"Team: {final_player.table[0]['team']}, "
       f"Position: {final_player.table[0]['position']}")
-table4 = Table()
+print()
+
+# finding team avg
+table4 = Table("Teams", teams)
+my_DB.insert(table4)
+selected_table = my_DB.search("Teams")
+top10 = selected_table.filter(lambda x: int(x["ranking"]) <= 10)
+print("The average number of games played for teams ranking 10 or above.")
+print(top10.aggregate(lambda x: sum(x)/len(x), 'games'))
+below10 = selected_table.filter(lambda x: int(x["ranking"]) > 10)
+print("The average number of games played for teams ranking below 10.")
+print(below10.aggregate(lambda x: sum(x)/len(x), 'games'))
