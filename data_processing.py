@@ -161,6 +161,18 @@ selected_table = my_DB.search("Teams")
 top10 = selected_table.filter(lambda x: int(x["ranking"]) <= 10)
 print("The average number of games played for teams ranking 10 or above.")
 print(top10.aggregate(lambda x: sum(x)/len(x), 'games'))
+print()
 below10 = selected_table.filter(lambda x: int(x["ranking"]) > 10)
 print("The average number of games played for teams ranking below 10.")
 print(below10.aggregate(lambda x: sum(x)/len(x), 'games'))
+print()
+
+# finding position avg
+selected_table = my_DB.search("Player")  # same database as last testcase
+forwards = selected_table.filter(lambda x: x['position'] == "forward")
+print("The average number of passes made by forward.")
+print(forwards.aggregate(lambda x: sum(x)/len(x), 'passes'))
+print()
+midfielders = selected_table.filter(lambda x: x['position'] == "midfielder")
+print("The average number of passes made by midfielders.")
+print(midfielders.aggregate(lambda x: sum(x)/len(x), 'passes'))
