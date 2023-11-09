@@ -17,24 +17,25 @@ def gen_comb_list(list_set):
         for i in list_set[0]:
             _list.append([i])
         return _list
-    if list_set[0] != list:
+    if list_set[-1] != list:
         temp_list = []
-        for i in list_set[0]:
-            for j in list_set[1]:
-                temp_list.append([i,j])
-        list_set.pop(0)
-        list_set.pop(0)
-        list_set.insert(0, temp_list)
+        for i in list_set[-1]:
+            for j in list_set[-2]:
+                temp_list.append([j,i])
+        list_set.pop(-1)
+        list_set.pop(-1)
+        list_set.append(temp_list)
     if len(list_set) >= 2:
         temp_list = []
-        for i in list_set[0]:
-            for j in list_set[1]:
+        for i in list_set[-1]:
+            for j in list_set[-2]:
                 x = copy.deepcopy(i)
                 x.append(j)
+                x.sort()
                 temp_list.append(x)
-        list_set.pop(0)
-        list_set.pop(0)
-        list_set.insert(0, temp_list)
+        list_set.pop(-1)
+        list_set.pop(-1)
+        list_set.append(temp_list)
         gen_comb_list(list_set)
     return list_set[0]
 
