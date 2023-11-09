@@ -30,8 +30,7 @@ def gen_comb_list(list_set):
         for i in list_set[-1]:
             for j in list_set[-2]:
                 x = copy.deepcopy(i)
-                x.append(j)
-                x.sort()
+                x.insert(0,j)
                 temp_list.append(x)
         list_set.pop(-1)
         list_set.pop(-1)
